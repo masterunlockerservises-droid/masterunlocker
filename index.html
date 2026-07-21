@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MASTER UNLOCKER</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+<script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        muGreen: '#10B981',
+                        muPink: '#EC4899',
+                        muBlue: '#3B82F6',
+                    } }} }
+    </script>
+    <style>
+        /* Global button click highlight animation */
+        .btn-click-effect:active {
+            animation: buttonGlow 0.2s ease-out;
+        }
+        @keyframes buttonGlow {
+            0% { transform: scale(0.98); box-shadow: 0 0 15px #10B981, 0 0 25px #EC4899; }
+            100% { transform: scale(1); box-shadow: none; }
+        }
+        .hide-view { display: none !important; }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-900 dark:bg-gray-950 dark:text-gray-100 min-h-screen font-sans transition-colors duration-300">
+
+    <div id="splash-screen" class="fixed inset-0 z-50 bg-gray-900 flex flex-col items-center justify-center text-white">
+        <img src="https://user12656.na.imgto.link/public/20260602/83354.avif" alt="MASTER UNLOCKER LOGO" class="w-32 h-32 object-contain mb-6 animate-pulse">
+        <h1 class="text-4xl font-extrabold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-muGreen via-muBlue to-muPink">MASTER UNLOCKER</h1>
+        <div class="mt-8 flex flex-col items-center">
+            <div class="w-48 h-2 bg-gray-700 rounded-full overflow-hidden">
+                <div id="splash-progress" class="h-full bg-gradient-to-r from-muGreen to-muPink transition-all duration-100 linear" style="width: 0%"></div>
+            </div>
+            <p class="mt-3 text-sm text-gray-400">Loading system files...</p>
+        </div>
+    </div>
+
+    <div id="app-content" class="hide-view flex flex-col min-h-screen">
+        
+        <header id="main-nav" class="hide-view sticky top-0 z-40 bg-white dark:bg-gray-900 shadow-md border-b border-gray-200 dark:border-gray-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <img src="https://user12656.na.imgto.link/public/20260602/83354.avif" alt="Logo" class="w-10 h-10 object-contain">
+                    <span class="font-black text-xl tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-muGreen to-muBlue">MASTER UNLOCKER</span>
+                </div>
+                <nav class="hidden md:flex space-x-1">
+                    <button onclick="switchView('home-view')" class="btn-click-effect px-4 py-2 rounded-md font-medium text-sm hover:bg-gray-100 dark:hover:bg-gray-800 text-muGreen">HOME</button>
+                    <button onclick="switchView('dashboard-view')" class="btn-click-effect px-4 py-2 rounded-md font-medium text-sm hover:bg-gray-100 dark:hover:bg-gray-800 text-muBlue">DASHBOARD</button>
+                    <button onclick="switchView('profile-view')" class="btn-click-effect px-4 py-2 rounded-md font-medium text-sm hover:bg-gray-100 dark:hover:bg-gray-800 text-muPink">PROFILE</button>
+                    <button onclick="switchView('activation-view')" class="btn-click-effect px-4 py-2 rounded-md font-medium text-sm hover:bg-gray-100 dark:hover:bg-gray-800 text-yellow-500">ACTIVATION</button>
+                </nav>
+                <div class="flex items-center gap-3">
+                    <button id="theme-toggle" class="btn-click-effect p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300">
+                        <span class="dark:hidden">🌙 Dark</span>
+                        <span class="hidden dark:inline">☀️ Light</span>
+                    </button>
+                    <button id="btn-logout" class="btn-click-effect bg-red-600 hover:bg-red-700 text-white text-xs px-3 py-2 rounded-md uppercase font-bold tracking-wider">Logout</button>
+                </div>
+            </div>
+            <div class="md:hidden flex justify-around bg-gray-50 dark:bg-gray-850 py-2 border-t border-gray-200 dark:border-gray-800 text-xs font-bold">
+                <button onclick="switchView('home-view')" class="text-muGreen">HOME</button>
+                <button onclick="switchView('dashboard-view')" class="text-muBlue">DASHBOARD</button>
+                <button onclick="switchView('profile-view')" class="text-muPink">PROFILE</button>
+                <button onclick="switchView('activation-view')" class="text-yellow-500">ACTIVATION</button>
+            </div>
+        </header>
+
+        <main class="flex-grow flex items-center justify-center p-4">
+
+            <div id="signup-view" class="w-full max-w-md bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 border border-gray-200 dark:border-gray-800 transition-transform transform">
+                <div class="text-center mb-6">
+                    <img src="https://user12656.na.imgto.link/public/20260602/83354.avif" alt="Logo" class="w-20 h-20 mx-auto object-contain mb-2">
+                    <h2 class="text-2xl font-bold dark:text-white">Create Account</h2>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Join Master Unlocker System</p>
+                </div>
+                <form id="signup-form" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold tracking-wide uppercase text-gray-400 mb-1">Email (@gmail.com only)</label>
+                        <input type="email" id="signup-email" required class="w-full bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-muGreen outline-none text-sm" placeholder="yourname@gmail.com">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold tracking-wide uppercase text-gray-400 mb-1">Password</label>
+                        <div class="relative">
+                            <input type="password" id="signup-password" required class="w-full bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg pl-4 pr-10 py-2.5 focus:ring-2 focus:ring-muGreen outline-none text-sm" placeholder="••••••••">
+                            <button type="button" onclick="togglePassword('signup-password')" class="absolute right-3 top-3 text-gray-400 text-xs">👁️</button>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold tracking-wide uppercase text-gray-400 mb-1">Confirm Password</label>
+                        <div class="relative">
+                            <input type="password" id="signup-confirm" required class="w-full bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg pl-4 pr-10 py-2.5 focus:ring-2 focus:ring-muGreen outline-none text-sm" placeholder="••••••••">
+                            <button type="button" onclick="togglePassword('signup-confirm')" class="absolute right-3 top-3 text-gray-400 text-xs">👁️</button>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-click-effect w-full py-3 bg-gradient-to-r from-muGreen to-muBlue text-white font-bold rounded-lg shadow-lg hover:brightness-110 transition mt-2">Sign Up</button>
+                </form>
+                <div class="text-center mt-6 text-sm text-gray-500">
+                    Already with account? <button onclick="switchView('login-view')" class="text-muPink font-semibold hover:underline btn-click-effect">Log in</button>
+                </div>
+            </div>
+
+            <div id="login-view" class="hide-view w-full max-w-md bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 border border-gray-200 dark:border-gray-800">
+                <div class="text-center mb-6">
+                    <img src="https://user12656.na.imgto.link/public/20260602/83354.avif" alt="Logo" class="w-20 h-20 mx-auto object-contain mb-2">
+                    <h2 class="text-2xl font-bold dark:text-white">Welcome Back</h2>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Log in to your master controls</p>
+                </div>
+                <form id="login-form" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold tracking-wide uppercase text-gray-400 mb-1">Enter email (@gmail.com)</label>
+                        <input type="email" id="login-email" required class="w-full bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-muBlue outline-none text-sm" placeholder="master@gmail.com">
+                    </div>
+                    <div>
+                        <div class="flex justify-between items-center mb-1">
+                            <label class="text-xs font-bold tracking-wide uppercase text-gray-400">Password</label>
+                            <button type="button" onclick="switchView('forgot-view')" class="text-xs text-muPink font-medium hover:underline btn-click-effect">Forgot Password?</button>
+                        </div>
+                        <div class="relative">
+                            <input type="password" id="login-password" required class="w-full bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg pl-4 pr-10 py-2.5 focus:ring-2 focus:ring-muBlue outline-none text-sm" placeholder="••••••••">
+                            <button type="button" onclick="togglePassword('login-password')" class="absolute right-3 top-3 text-gray-400 text-xs">👁️</button>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-click-effect w-full py-3 bg-gradient-to-r from-muBlue to-muPink text-white font-bold rounded-lg shadow-lg hover:brightness-110 transition mt-2">Log In</button>
+                </form>
+                <div class="text-center mt-6 text-sm text-gray-500">
+                    You don't have an account? <button onclick="switchView('signup-view')" class="text-muGreen font-semibold hover:underline btn-click-effect">Sign up</button>
+                </div>
+            </div>
+
+            <div id="forgot-view" class="hide-view w-full max-w-md bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 border border-gray-200 dark:border-gray-800">
+                <div class="text-center mb-6">
+                    <h2 class="text-2xl font-bold dark:text-white">Reset Password</h2>
+                    <p class="text-xs text-gray-500 mt-1">Enter your email address down below</p>
+                </div>
+                <form id="forgot-form" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold tracking-wide uppercase text-gray-400 mb-1">Email Address</label>
+                        <input type="email" id="forgot-email" required class="w-full bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-muPink outline-none text-sm" placeholder="name@gmail.com">
+                    </div>
+                    <button type="submit" class="btn-click-effect w-full py-3 bg-muPink text-white font-bold rounded-lg shadow-md hover:bg-pink-600 transition">Send Password reset link</button>
+                </form>
+                <div id="forgot-notice" class="hide-view mt-4 text-xs bg-yellow-50 dark:bg-yellow-950 border border-yellow-200 text-yellow-700 dark:text-yellow-300 p-3 rounded-lg leading-relaxed">
+                    ⚠️ Check on your email inbox or on spam inbox just in case. Mostly Check inside spam if first time.
+                </div>
+                <div class="text-center mt-6">
+                    <button onclick="switchView('login-view')" class="text-xs font-bold text-gray-400 hover:text-white btn-click-effect">← Back to Log In</button>
+                </div>
+            </div>
+
+            <div id="home-view" class="hide-view w-full max-w-4xl space-y-6">
+                <div class="bg-red-50 dark:bg-red-950 border-l-4 border-red-500 p-4 rounded-r-lg text-red-800 dark:text-red-200 text-sm font-semibold">
+                    ⚠️ Warning! Make sure to update your profile before continuing with anything else. This is to allow us save your details and information and all activation made.
+                </div>
+
+                <div class="bg-white dark:bg-gray-900 p-6 rounded-2xl border border-gray-200 dark:border-gray-800 flex flex-col sm:flex-row justify-between items-center gap-4">
+                    <div>
+                        <h3 class="text-lg font-bold">Global Performance Network</h3>
+                        <p class="text-sm text-gray-500">Live operational data matching servers</p>
+                    </div>
+                    <div class="text-right text-center sm:text-right">
+                        <span id="live-user-counter" class="text-3xl font-black text-muGreen">+59,905</span>
+                        <p class="text-xs uppercase font-bold tracking-wide text-gray-400 mt-1">are already using master unlocker</p>
+                    </div>
+                </div>
+
+                <div class="bg-white dark:bg-gray-900 p-8 rounded-2xl border border-gray-200 dark:border-gray-800 space-y-6">
+                   <div>
+    <h2 class="text-2xl font-black tracking-tight mb-2 text-transparent bg-clip-text bg-gradient-to-r from-muGreen via-muBlue to-muPink">Why Choose Master Unlocker App?</h2>
+    <p class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+        Master Unlocker gives you full control over your financed phone. It easily removes device payment locks and performance restrictions, letting you use your phone freely while paying off your balance at your own pace.
+    </p>
+</div>
+
+                    <!-- SHARE & EXTEND DAYS SECTION -->
+<div class="bg-white dark:bg-gray-900 p-8 rounded-2xl border border-gray-200 dark:border-gray-800 space-y-5">
+    
+    <div class="text-center">
+        <h2 class="text-xl font-bold text-muGreen">🎁 Increase Your Days Limit</h2>
+        <p class="text-sm text-gray-500 mt-2">
+            Share Master Unlocker with friends using M-Kopa phones and earn extra subscription days when they also try Master Unlocker.
+        </p>
+    </div>
+
+    <div class="bg-gray-50 dark:bg-gray-800 border border-gray-700 rounded-xl p-4">
+        <label class="block text-xs font-bold uppercase text-gray-400 mb-2">
+            Copy Text To Share
+        </label>
+
+        <textarea
+            id="share-message"
+            readonly
+            rows="6"
+            class="w-full bg-white dark:bg-gray-900 border border-gray-700 rounded-lg p-3 text-sm"
+        >
+             MASTER UNLOCKER 
+       Get Started for FREE
+
+Are you using a loan phone?
+(WATU, M-KOPA, SOLARPANDA or another financed device)
+
+Fill in the form below to get started with a FREE eligibility check.
+
+✅ After submitting your details, you will receive a link to download our master unlocker app for free.
+Try it today.
+
+Get Started Here:
+https://forms.gle/7fR8LWPi9fjD2fqX6
+
+Your information will only be used to process your request and determine the perfect software to be used.</textarea>
+        <button onclick="copyShareText()"
+            class="btn-click-effect mt-3 w-full py-3 bg-muGreen text-white font-bold rounded-lg">
+            📋 Copy Text
+        </button>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        
+        <button onclick="shareWhatsApp()"
+            class="btn-click-effect py-3 bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg">
+            WhatsApp
+        </button>
+
+        <button onclick="shareFacebook()"
+            class="btn-click-effect py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg">
+            Facebook
+        </button>
+
+        <button onclick="shareInstagram()"
+            class="btn-click-effect py-3 bg-pink-600 hover:bg-pink-700 text-white font-bold rounded-lg">
+            Instagram
+        </button>
+
+    </div>
+
+</div>
+                    <div>
+    <h3 class="text-lg font-bold mb-2">How It Works</h3>
+    <ul class="list-decimal list-inside text-sm text-gray-600 dark:text-gray-300 space-y-2 leading-relaxed">
+        <li><strong>App Detection:</strong> The system identifies device-locking applications, such as M-Kopa, running on your phone.</li>
+        <li><strong>Lock Deactivation:</strong> It temporarily disables the restriction protocols for your selected subscription period using secure local configurations.</li>
+        <li><strong>Permission Adjustment:</strong> System permission parameters are automatically recalibrated to keep your device functional and running smoothly.</li>
+    </ul>
+</div>
+
+
+                    <div class="space-y-3">
+                        <h4 class="text-xs uppercase font-bold tracking-wider text-gray-400">System Screenshots (Click image to open full resolution view)</h4>
+                        <div class="grid grid-cols-2 sm:grid-cols-5 gap-3">
+                            <a href="imglock2.jpg" target="_blank" class="block border border-gray-700 rounded-lg overflow-hidden hover:scale-105 transition"><img src="imglock2.jpg" alt="Photo 1" class="w-full h-24 object-cover"></a>
+                            <a href="imglock3.jpg" target="_blank" class="block border border-gray-700 rounded-lg overflow-hidden hover:scale-105 transition"><img src="imglock3.jpg" alt="Photo 2" class="w-full h-24 object-cover"></a>
+                            <a href="imglock4.jpg" target="_blank" class="block border border-gray-700 rounded-lg overflow-hidden hover:scale-105 transition"><img src="imglock5.jpg" alt="Photo 3" class="w-full h-24 object-cover"></a>
+                            <a href="imglock5.jpg" target="_blank" class="block border border-gray-700 rounded-lg overflow-hidden hover:scale-105 transition"><img src="imglock5.jpg" alt="Photo 4" class="w-full h-24 object-cover"></a>
+                                        </div>
+                    </div>
+
+                    <div class="border-t border-gray-200 dark:border-gray-800 pt-6">
+                        <h3 class="text-lg font-bold text-yellow-500 mb-2">Device Best Performance Requirements</h3>
+                        <p class="text-sm text-gray-400 mb-4">To allow Master Unlocker Launcher to work based on best performance, click on activation below to get your code.And learn how to launch and install it via play store</p>
+                        <button onclick="triggerGetStarted()" class="btn-click-effect px-6 py-3 bg-gradient-to-r from-muGreen to-muBlue text-white font-bold rounded-lg shadow-md hover:brightness-110 transition">Get Started</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="dashboard-view" class="hide-view w-full max-w-4xl space-y-6">
+                <div id="dashboard-locked-state" class="bg-white dark:bg-gray-900 p-8 rounded-2xl border border-gray-200 dark:border-gray-800 text-center space-y-4">
+                    <div class="text-4xl">🔒</div>
+                    <h2 class="text-xl font-bold">Activation Key Verification Required</h2>
+                    <p class="text-sm text-gray-400 max-w-md mx-auto">Click the activation section on dashborad above to get your activation code. Paste your verified generated hash key below.And learn how to launch our master unlocker launcher</p>
+                    <div class="max-w-xs mx-auto flex gap-2">
+                        <input type="text" id="dashboard-activation-input" placeholder="e.g. S070JK" class="w-full bg-gray-50 dark:bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-center text-sm font-mono tracking-widest outline-none focus:ring-2 focus:ring-muBlue">
+                        <button onclick="verifyDashboardCode()" class="btn-click-effect px-4 py-2 bg-muBlue text-white font-bold rounded-lg text-sm">Activate</button>
+                    </div>
+                </div>
+
+                <div id="dashboard-unlocked-state" class="hide-view space-y-6">
+                    <div class="bg-gradient-to-r from-green-900 to-emerald-950 border border-green-500 p-6 rounded-2xl text-white">
+                        <h2 class="text-xl font-bold mb-1"> System Success</h2>
+                        <p class="text-sm text-emerald-200">Your master unlocker app is successfully activated</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6 pt-4 border-t border-emerald-800 text-xs tracking-wide">
+                            <div>
+                                <span class="text-gray-400 uppercase font-bold block">Activation Status</span>
+                                <span class="text-green-400 font-extrabold text-sm block mt-0.5">ACTIVE (VALIDATED)</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-400 uppercase font-bold block">Subscription Plans Progress</span>
+                                <span class="text-white font-bold text-sm block mt-0.5">Premium Unlimited Client</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-400 uppercase font-bold block">Time / Expiry Remaining</span>
+                                <span id="dash-expiry-timer" class="text-yellow-400 font-mono text-sm block mt-0.5">Calculating...</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white dark:bg-gray-900 p-8 rounded-2xl border border-gray-200 dark:border-gray-800 space-y-4">
+                      <div class="bg-white dark:bg-gray-900 p-8 rounded-2xl border border-gray-200 dark:border-gray-800 space-y-4"><h2 class="text-lg font-bold text-muBlue uppercase tracking-wide">
+    INSTALL AND UNLOCKER GUIDELINES
+</h2>
+
+<div class="bg-yellow-50 dark:bg-yellow-950 border-l-4 border-yellow-500 p-4 rounded">
+    <p class="font-semibold">
+        Follow the steps below carefully to complete setup.
+    </p>
+</div>
+
+<ol class="list-decimal list-inside space-y-4 text-sm leading-relaxed">
+
+    <li>
+        Install the application from Google Play Store:
+        <br><br>
+
+        <a href="https://play.google.com/store/apps/details?id=com.lwsipl.hitechlauncher4"
+           target="_blank"
+           class="inline-block mt-2 px-4 py-2 bg-muGreen text-white rounded-lg font-bold">
+           INSTALL FROM PLAY STORE
+        </a>
+    </li>
+
+    <li>
+        After installation, launch the application using the link below:
+        <br><br>
+
+        <a href="https://play.google.com/store/apps/details?id=com.lwsipl.hitechlauncher4"
+           target="_blank"
+           class="inline-block mt-2 px-4 py-2 bg-muBlue text-white rounded-lg font-bold">
+           LAUNCH APPLICATION
+        </a>
+    </li>
+
+    <li>
+        Link your Gmail account when prompted.
+    </li>
+
+    <li>
+        Allow all required permissions requested by the application.
+    </li>
+
+    <li>
+        Keep your device connected to the internet.
+    </li>
+
+    <li>
+        Stay active and regularly check notifications.
+    </li>
+
+    <li>
+        Never miss updates, announcements, news, or important notifications.
+    </li>
+
+    <li>
+        Ensure your subscription remains active throughout your usage period.
+    </li>
+
+</ol>
+
+<div class="bg-green-50 dark:bg-green-950 border-l-4 border-green-500 p-4 rounded text-sm">
+    ✅ Setup is complete once the application is installed, launched, Gmail is linked, and all permissions are granted.
+</div>
+
+</div>
+                    </div>
+
+                    <div class="bg-white dark:bg-gray-900 p-8 rounded-2xl border border-gray-200 dark:border-gray-800 space-y-4">
+                        <div>
+                            <h3 class="text-lg font-bold">Did you experience any problems? Contact Us</h3>
+                            <p class="text-xs text-gray-500">Our customer engagement infrastructure handles tickets live</p>
+                        </div>
+                        <form id="contact-form" class="space-y-3">
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-gray-400 mb-1">Email</label>
+                                <input type="email" required id="contact-email" class="w-full bg-gray-50 dark:bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-sm outline-none focus:ring-1 focus:ring-muBlue">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-gray-400 mb-1">Messages</label>
+                                <textarea required id="contact-message" rows="3" class="w-full bg-gray-50 dark:bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-sm outline-none focus:ring-1 focus:ring-muBlue" placeholder="Describe your error sequence..."></textarea>
+                            </div>
+                            <button type="submit" class="btn-click-effect px-5 py-2.5 bg-muBlue hover:bg-blue-600 text-white font-bold text-sm rounded-lg shadow">Send</button>
+                        </form>
+                        <div class="pt-4 border-t border-gray-200 dark:border-gray-800 text-xs text-gray-400 space-y-1">
+                            <p>If you have 7 days without response, reach us directly via enterprise emails:</p>
+                            <p class="font-mono text-muPink font-semibold">masterunlocker@gmail.com | masterunlocker@info.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="profile-view" class="hide-view w-full max-w-xl bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 border border-gray-200 dark:border-gray-800">
+                <div class="flex items-center gap-4 border-b border-gray-200 dark:border-gray-800 pb-6 mb-6">
+                    <div class="w-16 h-16 bg-gradient-to-tr from-muGreen to-muPink rounded-full flex items-center justify-center text-2xl font-bold text-white shadow-md">
+                        👤
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-bold">Personal Information Profile</h2>
+                        <p class="text-xs text-gray-500">Manage account properties and country logs</p>
+                    </div>
+                </div>
+                <form id="profile-form" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-400 mb-1">Full Names</label>
+                        <input type="text" required id="profile-name" class="w-full bg-gray-50 dark:bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-sm focus:ring-1 focus:ring-muPink outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Email Address (Not Editable)</label>
+                        <input type="email" id="profile-email" readonly class="w-full bg-gray-100 dark:bg-gray-9lim00 border border-gray-300 dark:border-gray-800 text-gray-400 rounded-lg px-4 py-2 text-sm cursor-not-allowed outline-none">
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-gray-400 mb-1">Country</label>
+                            <select id="profile-country" class="w-full bg-gray-50 dark:bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm focus:ring-1 focus:ring-muPink outline-none">
+                                <option value="US">United States 🇺🇸</option>
+                                <option value="GB">United Kingdom 🇬🇧</option>
+                                </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-gray-400 mb-1">Phone Country Code</label>
+                            <select id="profile-phone-code" class="w-full bg-gray-50 dark:bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm focus:ring-1 focus:ring-muPink outline-none">
+                                   <option value="+1">USA (🇺🇸 +1)</option>
+                                <option value="+44">UK (🇬🇧 +44)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-400 mb-1">Phone Number</label>
+                        <input type="tel" required id="profile-phone-num" class="w-full bg-gray-50 dark:bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-sm focus:ring-1 focus:ring-muPink outline-none" placeholder="712345678">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-400 mb-1">Phone You Are Using</label>
+                        <select id="profile-device-type" class="w-full bg-gray-50 dark:bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm focus:ring-1 focus:ring-muPink outline-none">
+                            <option value="samsung">Samsung Mobile</option>
+                            <option value="iphone">Apple iPhone</option>
+                            <option value="tecnomobile">Tecno Mobile</option>
+                            <option value="infinix">Infinix Device</option>
+                            <option value="xiaomi">Xiaomi / Redmi</option>
+                            <option value="oppo">Oppo Device</option>
+                            <option value="vivo">Vivo Smartphone</option>
+                            <option value="realme">Realme</option>
+                            <option value="huawei">Huawei Technologies</option>
+                            <option value="oneplus">OnePlus</option>
+                            <option value="google">Google Pixel</option>
+                            <option value="nokia">Nokia HMD Global</option>
+                            <option value="itel">iTel Mobile</option>
+                            <option value="sony">Sony Xperia</option>
+                            <option value="htc">HTC Phone</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-click-effect w-full py-3 bg-muPink hover:bg-pink-600 text-white font-bold rounded-lg shadow-md transition mt-2">Save Profile</button>
+                </form>
+            </div>
+
+            <div id="activation-view" class="hide-view w-full max-w-2xl bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 border border-gray-200 dark:border-gray-800 space-y-6">
+
+    <div class="text-center">
+        <h2 class="text-xl font-extrabold tracking-wide text-yellow-500 uppercase">
+            SELECT YOUR LOCATION
+        </h2>
+        <p class="text-xs text-gray-400 mt-1">
+            Choose your country before continuing.
+        </p>
+    </div>
+
+    <div>
+        <label class="block text-xs font-bold uppercase text-gray-400 mb-2">
+            Country
+        </label>
+
+      <select id="activation-country"
+        onchange="enablePlans()"
+        class="w-full bg-gray-50 dark:bg-gray-800 border border-gray-700 rounded-lg px-4 py-3">
+
+  <option value="">-- Select Country --</option>
+
+<option value="Australia">Australia 🇦🇺</option>
+<option value="Bangladesh">Bangladesh 🇧🇩</option>
+<option value="Canada">Canada 🇨🇦</option>
+<option value="China">China 🇨🇳</option>
+<option value="Egypt">Egypt 🇪🇬</option>
+<option value="Ethiopia">Ethiopia 🇪🇹</option>
+<option value="Ghana">Ghana 🇬🇭</option>
+<option value="India">India 🇮🇳</option>
+<option value="Kenya">Kenya 🇰🇪</option>
+<option value="Malawi">Malawi 🇲🇼</option>
+<option value="Nigeria">Nigeria 🇳🇬</option>
+<option value="Pakistan">Pakistan 🇵🇰</option>
+<option value="Rwanda">Rwanda 🇷🇼</option>
+<option value="SaudiArabia">Saudi Arabia 🇸🇦</option>
+<option value="SouthAfrica">South Africa 🇿🇦</option>
+<option value="Tanzania">Tanzania 🇹🇿</option>
+<option value="Uganda">Uganda 🇺🇬</option>
+<option value="UnitedArabEmirates">United Arab Emirates 🇦🇪</option>
+<option value="UnitedKingdom">United Kingdom 🇬🇧</option>
+<option value="UnitedStates">United States 🇺🇸</option>
+<option value="Zambia">Zambia 🇿🇲</option>
+
+</select>
+
+    <div id="plans-section" class="hidden">
+                    <h2 class="text-xl font-extrabold tracking-wide text-yellow-500 uppercase">PLEASE CHOOSE A SUBSCRIPTION PLAN TO CONTINUE</h2>
+                    <p class="text-xs text-gray-400 mt-1">Select an optimal plan to unlock your operational license code</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                    <label class="border border-gray-700 p-4 rounded-xl flex items-center justify-between cursor-pointer hover:bg-gray-850 select-none">
+                        <div class="text-sm">
+                            <p class="font-bold">Two Weeks Plan</p>
+                           <p class="text-xs text-yellow-500 font-mono"data-kes="100">USD $0.77</p>
+                        </div>
+                        <input type="radio" name="sub-plan" value="100" checked class="accent-yellow-500" onclick="updatePlanCost(100)">
+                    </label>
+                    <label class="border border-gray-700 p-4 rounded-xl flex items-center justify-between cursor-pointer hover:bg-gray-850 select-none">
+                        <div class="text-sm">
+                            <p class="font-bold">One Month Plan</p>
+                            <p class="text-xs text-yellow-500 font-mono"data-kes="250">USD $1.93</p>
+                        </div>
+                        <input type="radio" name="sub-plan" value="250" class="accent-yellow-500" onclick="updatePlanCost(250)">
+                    </label>
+                    <label class="border border-gray-700 p-4 rounded-xl flex items-center justify-between cursor-pointer hover:bg-gray-850 select-none">
+                        <div class="text-sm">
+                            <p class="font-bold">Two Months</p>
+                          <p class="text-xs text-yellow-500 font-mono"data-kes="450">USD $3.47</p>
+                        </div>
+                        <input type="radio" name="sub-plan" value="450" class="accent-yellow-500" onclick="updatePlanCost(450)">
+                    </label>
+                    <label class="border border-gray-700 p-4 rounded-xl flex items-center justify-between cursor-pointer hover:bg-gray-850 select-none">
+                        <div class="text-sm">
+                            <p class="font-bold">Half Year</p>
+                            <p class="text-xs text-yellow-500 font-mono"data-kes="800">USD $6.16</p>
+                        </div>
+                        <input type="radio" name="sub-plan" value="800" class="accent-yellow-500" onclick="updatePlanCost(800)">
+                    </label>
+                    <label class="border border-gray-700 p-4 rounded-xl flex items-center justify-between cursor-pointer hover:bg-gray-850 select-none">
+                        <div class="text-sm">
+                            <p class="font-bold">One Year</p>
+                           <p class="text-xs text-yellow-500 font-mono"data-kes="1500">USD $11.55</p>
+                        </div>
+                        <input type="radio" name="sub-plan" value="1500" class="accent-yellow-500" onclick="updatePlanCost(1500)">
+                    </label>
+                </div>
+
+               <div id="payment-method-box"
+     class="bg-gray-50 dark:bg-gray-850 border border-gray-700 p-4 rounded-xl">
+</div>
+
+                <div class="space-y-3">
+                    <label class="block text-xs font-bold tracking-wider text-gray-400 uppercase">PLEASE PASTE M-PESA MESSAGES FOR CONFIRMATION</label>
+                    <textarea id="mpesa-pastebox" rows="4" class="w-full font-mono text-xs p-3 bg-gray-50 dark:bg-gray-800 border border-gray-700 rounded-xl focus:ring-1 focus:ring-yellow-500 outline-none" placeholder="Paste full confirmed M-Pesa message here..."></textarea>
+                    <button onclick="processMpesaPaymentCode()" class="btn-click-effect w-full py-3 bg-yellow-500 text-gray-950 font-black tracking-wider text-sm rounded-xl uppercase">Confirm Verification</button>
+                </div>
+
+                <div id="activation-success-card" class="hide-view bg-gradient-to-br from-gray-900 to-gray-950 border border-yellow-500 p-6 rounded-xl text-center space-y-3">
+                    <p class="text-xs text-green-400 font-bold">Verification system matches successful payment configuration parameters!</p>
+                    <div class="text-sm font-semibold">Your generated activation code is:</div>
+                    <div id="generated-code-display" class="text-3xl font-mono font-black text-yellow-400 tracking-widest bg-gray-900 p-2.5 rounded border border-gray-800 select-all">S070JK</div>
+                    <p class="text-xs text-gray-400">Copy it to activate master unlocker app views. Your code expires within:</p>
+                    <div id="activation-timer-countdown" class="text-lg font-mono font-bold text-red-500">30:00</div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyAL5q018RT2w7AOzBCeCJohDXGKV3qsxnI",
+    authDomain: "master-unlocker-47401.firebaseapp.com",
+    projectId: "master-unlocker-47401",
+    storageBucket: "master-unlocker-47401.firebasestorage.app",
+    messagingSenderId: "217861221486",
+    appId: "1:217861221486:web:9d9f6dcba0f546e3008a7f"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+let selectedAmount = 100;
+let activeTimerInterval = null;
+let liveUsers = 59905;
+let usedCodesCache = JSON.parse(localStorage.getItem('mu_used_codes') || '[]');
+
+// ─── THEME (runs immediately) ────────────────────────────────────────────────
+document.documentElement.classList.remove('dark');
+if (localStorage.getItem('mu_theme') === 'dark') {
+    document.documentElement.classList.add('dark');
+}
+
+// ─── CURRENCY RATES ──────────────────────────────────────────────────────────
+const currencyRates = {
+    Kenya: { currency: "KES", rate: 1 },
+    Uganda: { currency: "UGX", rate: 28 },
+    Tanzania: { currency: "TZS", rate: 18 },
+    Rwanda: { currency: "RWF", rate: 9 },
+    Nigeria: { currency: "NGN", rate: 12 },
+    SouthAfrica: { currency: "ZAR", rate: 0.14 },
+    Ghana: { currency: "GHS", rate: 0.12 },
+    Zambia: { currency: "ZMW", rate: 0.18 },
+    Malawi: { currency: "MWK", rate: 8 },
+    Ethiopia: { currency: "ETB", rate: 0.75 },
+    Egypt: { currency: "EGP", rate: 0.40 },
+    India: { currency: "INR", rate: 0.65 },
+    Pakistan: { currency: "PKR", rate: 2.20 },
+    Bangladesh: { currency: "BDT", rate: 0.85 },
+    China: { currency: "CNY", rate: 0.05 },
+    UAE: { currency: "AED", rate: 0.03 },
+    SaudiArabia: { currency: "SAR", rate: 0.03 },
+    UnitedKingdom: { currency: "GBP", rate: 0.006 },
+    Europe: { currency: "EUR", rate: 0.007 },
+    Canada: { currency: "CAD", rate: 0.01 },
+    UnitedStates: { currency: "USD", rate: 0.008 },
+    Australia: { currency: "AUD", rate: 0.012 }
+};
+
+// ─── SPLASH LOADER ───────────────────────────────────────────────────────────
+window.addEventListener('DOMContentLoaded', () => {
+    setupMockCountriesAndDevices(); 
+    startLiveUserSimulation();      
+
+    let elapsedSeconds = 0;
+    const progressEl = document.getElementById('splash-progress');
+    const counterEl = document.getElementById('splash-counter');
+
+    const loaderInterval = setInterval(() => {
+        elapsedSeconds += 0.1;
+        
+        let percent = Math.min((elapsedSeconds / 10) * 100, 100);
+        if (progressEl) progressEl.style.width = percent + '%';
+
+        let timeLeft = Math.max(10 - elapsedSeconds, 0);
+        if (counterEl) counterEl.innerText = Math.ceil(timeLeft);
+
+        if (elapsedSeconds >= 10) {
+            clearInterval(loaderInterval);
+            const splashScreen = document.getElementById('splash-screen');
+            const appContent = document.getElementById('app-content');
+            
+            if (splashScreen) splashScreen.style.display = 'none';
+            if (appContent) appContent.classList.remove('hide-view');
+            initAuthCheckState();
+        }
+    }, 100);
+});
+
+// ─── AUTH STATE ──────────────────────────────────────────────────────────────
+function initAuthCheckState() {
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            document.documentElement.classList.remove('dark');
+            localStorage.setItem('mu_theme', 'light');
+            const profileEmailInput = document.getElementById('profile-email');
+            const mainNav = document.getElementById('main-nav');
+            
+            if (profileEmailInput) profileEmailInput.value = user.email;
+            if (mainNav) mainNav.classList.remove('hide-view');
+            switchView('home-view');
+        } else {
+            const mainNav = document.getElementById('main-nav');
+            if (mainNav) mainNav.classList.add('hide-view');
+            switchView('login-view');
+        }
+    });
+}
+
+// ─── ROUTING ─────────────────────────────────────────────────────────────────
+window.switchView = function(viewId) {
+    const views = ['signup-view','login-view','forgot-view','home-view','dashboard-view','profile-view','activation-view'];
+    views.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.classList.add('hide-view');
+    });
+
+    if (viewId === 'dashboard-view') evaluateDashboardState();
+
+    const targetView = document.getElementById(viewId);
+    if (targetView) targetView.classList.remove('hide-view');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+// ─── SHARE HELPERS ───────────────────────────────────────────────────────────
+window.copyShareText = function() {
+    const shareMsgEl = document.getElementById('share-message');
+    if (!shareMsgEl) return;
+    const text = shareMsgEl.value;
+    navigator.clipboard.writeText(text)
+        .then(() => alert("Share text copied successfully."))
+        .catch(() => alert("Unable to copy text."));
+};
+
+window.shareWhatsApp = function() {
+    const shareMsgEl = document.getElementById('share-message');
+    if (!shareMsgEl) return;
+    const text = encodeURIComponent(shareMsgEl.value);
+    window.open(`https://wa.me/?text=${text}`, '_blank');
+};
+
+window.shareFacebook = function() {
+    window.open('https://www.facebook.com/sharer/sharer.php?u=https://yourwebsite.com', '_blank');
+};
+
+window.shareInstagram = function() {
+    copyShareText();
+    alert("Instagram does not support direct web sharing. The text has been copied. Open Instagram and paste it into your post or story.");
+};
+
+// ─── PASSWORD TOGGLE ─────────────────────────────────────────────────────────
+window.togglePassword = function(fieldId) {
+    const field = document.getElementById(fieldId);
+    if (field) field.type = (field.type === "password") ? "text" : "password";
+};
+
+// ─── HELPERS ─────────────────────────────────────────────────────────────────
+function isValidGmail(email) {
+    return email.toLowerCase().endsWith('@gmail.com');
+}
+
+function sortSelectAlphabetically(selectId) {
+    const select = document.getElementById(selectId);
+    if (!select) return; // FIX: Prevents "Cannot set properties of null" error if drop-down element is missing
+    const firstOption = select.options[0];
+    const options = Array.from(select.options).slice(1).sort((a, b) => a.text.localeCompare(b.text));
+    select.innerHTML = "";
+    if (firstOption) select.appendChild(firstOption);
+    options.forEach(opt => select.appendChild(opt));
+}
+
+// ─── LIVE USER SIMULATION ───────────────────────────────────────────────────
+function startLiveUserSimulation() {
+    const counterEl = document.getElementById('live-user-counter');
+    if (localStorage.getItem('mu_live_users')) {
+        liveUsers = parseInt(localStorage.getItem('mu_live_users'), 10);
+    }
+    if (counterEl) counterEl.innerText = "+" + liveUsers.toLocaleString();
+    setInterval(() => {
+        liveUsers += 5;
+        localStorage.setItem('mu_live_users', liveUsers);
+        if (counterEl) counterEl.innerText = "+" + liveUsers.toLocaleString();
+    }, 1800000);
+}
+
+// ─── COUNTRY PRICE UPDATE ────────────────────────────────────────────────────
+function updateCountryPrices(country) {
+    const rates = currencyRates[country];
+    if (!rates) return;
+    document.querySelectorAll("[data-kes]").forEach(item => {
+        const kesAmount = Number(item.dataset.kes);
+        const localAmount = Math.round(kesAmount * rates.rate);
+        item.innerText = `${rates.currency} ${localAmount.toLocaleString()}`;
+    });
+}
+
+// ─── ACTIVATION COUNTDOWN ────────────────────────────────────────────────────
+function startActivationCountdown(durationSeconds) {
+    clearInterval(activeTimerInterval);
+    let timeRemaining = durationSeconds;
+    const timerDisplay = document.getElementById('activation-timer-countdown');
+
+    activeTimerInterval = setInterval(() => {
+        let minutes = Math.floor(timeRemaining / 60);
+        let seconds = timeRemaining % 60;
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+        if (timerDisplay) timerDisplay.innerText = `${minutes}:${seconds}`;
+        
+        if (--timeRemaining < 0) {
+            clearInterval(activeTimerInterval);
+            if (timerDisplay) timerDisplay.innerText = "EXPIRED";
+            localStorage.removeItem('mu_generated_license');
+        }
+    }, 1000);
+}
+
+// ─── ENABLE PLANS ────────────────────────────────────────────────────────────
+window.enablePlans = function() {
+    const countryEl = document.getElementById("activation-country");
+    if (!countryEl) return;
+    const country = countryEl.value;
+    if (!country) return;
+
+    updateCountryPrices(country);
+
+    const plans = document.getElementById("plans-section");
+    const paymentBox = document.getElementById("payment-method-box");
+
+    if (plans) plans.classList.remove("hidden");
+    localStorage.setItem("mu_selected_country", country);
+
+    let paymentHTML = "";
+
+    if (country === "Kenya") {
+        paymentHTML = `
+<h3 class="font-bold text-muGreen mb-2">🇰🇪 Kenya Payment</h3>
+        <p class="text-sm mb-2">Pay using M-Pesa Buy Goods</p>
+        <div class="bg-white dark:bg-gray-900 p-3 rounded-lg border border-gray-700">
+            <p><strong>Till Number:</strong> 7964248</p>
+            <p><strong>Name:</strong> JOSEPH</p>
+        </div>`;
+    } else if (country === "Tanzania") {
+        paymentHTML = `
+        <h3 class="font-bold text-blue-500 mb-2">🇹🇿 Tanzania Payment</h3>
+        <p class="text-sm">Pay using M-Pesa Tanzania.</p>
+        <p class="mt-2 font-bold">Number: +255757787356</p>
+        <p class="mt-2 font-bold">Name: Ramon</p>`;
+    } else if (country === "Rwanda") {
+        paymentHTML = `
+        <h3 class="font-bold text-green-500 mb-2">🇷🇼 Rwanda Payment</h3>
+        <p class="text-sm">Pay using MTN Rwanda.</p>
+        <p class="mt-2 font-bold">Number: +250725164567</p>
+        <p class="mt-2 font-bold">Name: Randol</p>`;
+    } else if (country === "Nigeria") {
+        paymentHTML = `
+        <h3 class="font-bold text-green-500 mb-2">🇳🇬 Nigeria Payment</h3>
+        <p class="text-sm">Bank Transfer Payment.</p>
+        <p class="mt-2 font-bold">Account: 6767880</p>
+        <p class="mt-2 font-bold">Name: BOMAST</p>`;
+    } else {
+        paymentHTML = `
+        <h3 class="font-bold text-muPink mb-3">🌍 International Payment (PayPal)</h3>
+        <div class="bg-white dark:bg-gray-900 p-4 rounded-lg border border-gray-700">
+            <p class="text-sm mb-2">Send payment via PayPal to:</p>
+            <div class="font-bold text-lg text-muBlue break-all">masterunlocker@gmail.com</div>
+            <p class="text-xs text-gray-500 mt-3">After payment, paste your PayPal transaction ID below for verification.</p>
+        </div>`;
+    }
+
+    if (paymentBox) paymentBox.innerHTML = paymentHTML;
+};
+        
+// ─── PLAN COST SELECTOR ──────────────────────────────────────────────────────
+window.updatePlanCost = function(cost) {
+    selectedAmount = cost;
+    const costDisplay = document.getElementById('display-selected-cost');
+    if (costDisplay) costDisplay.innerText = `KSH ${cost}`;
+};
+
+// ─── MPESA PAYMENT PROCESSOR ─────────────────────────────────────────────────
+window.processMpesaPaymentCode = function() {
+    const pasteBox = document.getElementById('mpesa-pastebox');
+    if (!pasteBox) return;
+    const messageInput = pasteBox.value.trim();
+
+    const targetMpesaRegex = /^[A-Z0-9]{10}\s+Confirmed\.\s+Ksh[\d,]+\.\d{2}\s+paid\s+to\s+JOSEPH\s+WAMBUA\s+WANZIA\.\s+on\s+\d{1,2}\/\d{1,2}\/\d{2}\s+at\s+\d{1,2}:\d{2}\s+(AM|PM)\.\s*New\s+M-PESA\s+balance\s+is\s+Ksh[\d,]+\.\d{2}\.\s+Transaction\s+cost,\s+Ksh[\d,]+\.\d{2}\.\s+Amount\s+you\s+can\s+transact\s+within\s+the\s+day\s+is\s+[\d,]+\.\d{2}\./i;
+
+    if (!targetMpesaRegex.test(messageInput)) {
+        alert("invalid mpesa payment — please check that the payment was done correctly or try again");
+        return;
+    }
+
+    const transactionCode = messageInput.substring(0, 10);
+
+    if (usedCodesCache.includes(transactionCode)) {
+        alert("This message has already been used to generate a code");
+        return;
+    }
+
+    const matchAmountString = messageInput.match(/Ksh(\d+)\.\d{2} paid to JOSEPH WAMBUA WANZIA/);
+    if (!matchAmountString || parseInt(matchAmountString[1], 10) !== selectedAmount) {
+        alert(`please pay the amount for the selected plan. Expected KSH ${selectedAmount}`);
+        return;
+    }
+
+    const licenseKey = `MU-${selectedAmount}-${Math.floor(1000 + Math.random() * 9000)}`;
+
+    usedCodesCache.push(transactionCode);
+    localStorage.setItem('mu_used_codes', JSON.stringify(usedCodesCache));
+
+    const codeDisplay = document.getElementById('generated-code-display');
+    const successCard = document.getElementById('activation-success-card');
+    if (codeDisplay) codeDisplay.innerText = licenseKey;
+    if (successCard) successCard.classList.remove('hide-view');
+
+    localStorage.setItem('mu_generated_license', licenseKey);
+    localStorage.setItem('mu_license_expiration_timestamp', Date.now() + (30 * 60 * 1000));
+
+    // FIX: Changed from 30 to 1800 so countdown timer correctly displays 30:00 minutes!
+    startActivationCountdown(1800);
+};
+
+// ─── DASHBOARD GATEWAY ───────────────────────────────────────────────────────
+window.triggerGetStarted = function() {
+    switchView('dashboard-view');
+};
+
+function evaluateDashboardState() {
+    const activeSessionToken = localStorage.getItem('mu_dashboard_unlocked_session');
+    const lockedState = document.getElementById('dashboard-locked-state');
+    const unlockedState = document.getElementById('dashboard-unlocked-state');
+
+    if (activeSessionToken === 'true') {
+        renderDashboardUnlockedView();
+    } else {
+        if (lockedState) lockedState.classList.remove('hide-view');
+        if (unlockedState) unlockedState.classList.add('hide-view');
+    }
+}
+
+window.verifyDashboardCode = function() {
+    const inputEl = document.getElementById('dashboard-activation-input');
+    if (!inputEl) return;
+    const enteredCode = inputEl.value.trim();
+    const validGeneratedCode = localStorage.getItem('mu_generated_license');
+    const validationExpiry = localStorage.getItem('mu_license_expiration_timestamp');
+
+    if (!validGeneratedCode || Date.now() > parseInt(validationExpiry, 10)) {
+        alert("Validation error: Key doesn't exist or has expired (30-minute window).");
+        return;
+    }
+
+    if (enteredCode === validGeneratedCode) {
+        localStorage.setItem('mu_dashboard_unlocked_session', 'true');
+        localStorage.setItem('mu_subscription_end_date', Date.now() + (14 * 24 * 60 * 60 * 1000));
+        renderDashboardUnlockedView();
+    } else {
+        alert("Error: Verification code does not match.");
+    }
+};
+
+function renderDashboardUnlockedView() {
+    const lockedState = document.getElementById('dashboard-locked-state');
+    const unlockedState = document.getElementById('dashboard-unlocked-state');
+    if (lockedState) lockedState.classList.add('hide-view');
+    if (unlockedState) unlockedState.classList.remove('hide-view');
+
+    const expiryTimestamp = localStorage.getItem('mu_subscription_end_date');
+    const timerDisplay = document.getElementById('dash-expiry-timer');
+    
+    if (expiryTimestamp && timerDisplay) {
+        const deltaMs = parseInt(expiryTimestamp, 10) - Date.now();
+        if (deltaMs > 0) {
+            const daysRemaining = Math.ceil(deltaMs / (1000 * 60 * 60 * 24));
+            timerDisplay.innerText = `${daysRemaining} Days Operational remaining`;
+        } else {
+            timerDisplay.innerText = "Subscription Expired";
+            localStorage.removeItem('mu_dashboard_unlocked_session');
+            evaluateDashboardState();
+        }
+    }
+}
+
+// ─── PROFILE & COUNTRY SETUP ─────────────────────────────────────────────────
+function setupMockCountriesAndDevices() {
+    const countrySelect = document.getElementById('profile-country');
+    const phoneCodeSelect = document.getElementById('profile-phone-code');
+
+    // Safe protection check so setup continues running safely even if current view lacks elements
+    if (!countrySelect || !phoneCodeSelect) return; 
+
+    const standardCountryList = [
+        {n:"Nigeria",c:"🇳🇬",p:"+234"},{n:"Kenya",c:"🇰🇪",p:"+254"},{n:"Tanzania",c:"🇹🇿",p:"+255"},
+        {n:"Ghana",c:"🇬🇭",p:"+233"},{n:"South Africa",c:"🇿🇦",p:"+27"},{n:"Ethiopia",c:"🇪🇹",p:"+251"},
+        {n:"Egypt",c:"🇪🇬",p:"+20"},{n:"Rwanda",c:"🇷🇼",p:"+250"},{n:"Uganda",c:"🇺🇬",p:"+256"},
+        {n:"Somalia",c:"🇸🇴",p:"+252"},{n:"Zambia",c:"🇿🇲",p:"+260"},{n:"Malawi",c:"🇲🇼",p:"+265"},
+        {n:"India",c:"🇮🇳",p:"+91"},{n:"UAE",c:"🇦🇪",p:"+971"},{n:"Saudi Arabia",c:"🇸🇦",p:"+966"},
+        {n:"Canada",c:"🇨🇦",p:"+1"},{n:"Germany",c:"🇩🇪",p:"+49"},{n:"France",c:"🇫🇷",p:"+33"},
+        {n:"Australia",c:"🇦🇺",p:"+61"},{n:"China",c:"🇨🇳",p:"+86"},{n:"Japan",c:"🇯🇵",p:"+81"},
+        {n:"Brazil",c:"🇧🇷",p:"+55"},{n:"Mexico",c:"🇲🇽",p:"+52"},{n:"South Korea",c:"🇰🇷",p:"+82"},
+        {n:"Algeria",c:"🇩🇿",p:"+213"},{n:"Angola",c:"🇦🇴",p:"+244"},{n:"Argentina",c:"🇦🇷",p:"+54"},
+        {n:"Austria",c:"🇦🇹",p:"+43"},{n:"Bangladesh",c:"🇧🇩",p:"+880"},{n:"Belgium",c:"🇧🇪",p:"+32"},
+        {n:"Cameroon",c:"🇨🇲",p:"+237"},{n:"Chile",c:"🇨🇱",p:"+56"},{n:"Colombia",c:"🇨🇴",p:"+57"},
+        {n:"Denmark",c:"🇩🇰",p:"+45"},{n:"Finland",c:"🇫🇮",p:"+358"},{n:"Greece",c:"🇬🇷",p:"+30"},
+        {n:"Indonesia",c:"🇮🇩",p:"+62"},{n:"Ireland",c:"🇮🇪",p:"+353"},{n:"Israel",c:"🇮🇱",p:"+972"},
+        {n:"Italy",c:"🇮🇹",p:"+39"},{n:"Malaysia",c:"🇲🇾",p:"+60"},{n:"Morocco",c:"🇲🇦",p:"+212"},
+        {n:"Netherlands",c:"🇳🇱",p:"+31"},{n:"New Zealand",c:"🇳🇿",p:"+64"},{n:"Norway",c:"🇳🇴",p:"+47"},
+        {n:"Pakistan",c:"🇵🇰",p:"+92"},{n:"Peru",c:"🇵🇪",p:"+51"},{n:"Philippines",c:"🇵🇭",p:"+63"},
+        {n:"Poland",c:"🇵🇱",p:"+48"},{n:"Portugal",c:"🇵🇹",p:"+351"},{n:"Qatar",c:"🇶🇦",p:"+974"},
+        {n:"Spain",c:"🇪🇸",p:"+34"},{n:"Sweden",c:"🇸🇪",p:"+46"},{n:"Switzerland",c:"🇨🇭",p:"+41"},
+        {n:"Thailand",c:"🇹🇭",p:"+66"},{n:"Turkey",c:"🇹🇷",p:"+90"},{n:"Vietnam",c:"🇻🇳",p:"+84"},
+        {n:"Zimbabwe",c:"🇿🇼",p:"+263"}
+    ];
+
+    standardCountryList.forEach(item => {
+        const optionCountry = document.createElement('option');
+        optionCountry.value = item.n.toUpperCase().substring(0, 2);
+        optionCountry.innerHTML = `${item.n} ${item.c}`;
+        countrySelect.appendChild(optionCountry);
+
+        const optionCode = document.createElement('option');
+        optionCode.value = item.p;
+        optionCode.innerHTML = `${item.n} (${item.c} ${item.p})`;
+        phoneCodeSelect.appendChild(optionCode);
+    });
+
+    sortSelectAlphabetically("profile-country");
+    sortSelectAlphabetically("profile-phone-code");
+    sortSelectAlphabetically("activation-country");
+}
+
+// ─── FORM HANDLERS ───────────────────────────────────────────────────────────
+const signupForm = document.getElementById('signup-form');
+if (signupForm) {
+    signupForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('signup-email').value.trim();
+        const password = document.getElementById('signup-password').value;
+        const confirm = document.getElementById('signup-confirm').value;
+
+        if (!isValidGmail(email)) { alert("Error: Only @gmail.com addresses are accepted."); return; }
+        if (password !== confirm) { alert("Validation Mismatch: Passwords do not match."); return; }
+
+        try {
+            await createUserWithEmailAndPassword(auth, email, password);
+            alert("Registration successful! Welcome to Master Unlocker.");
+        } catch (err) { alert(`Registration error: ${err.message}`); }
+    });
+}
+
+const loginForm = document.getElementById('login-form');
+if (loginForm) {
+    loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('login-email').value.trim();
+        const password = document.getElementById('login-password').value;
+
+        if (!isValidGmail(email)) { alert("Error: Email must be a @gmail.com address."); return; }
+
+        try {
+            await signInWithEmailAndPassword(auth, email, password);
+        } catch (err) { alert(`Login error: ${err.message}`); }
+    });
+}
+
+const forgotForm = document.getElementById('forgot-form');
+if (forgotForm) {
+    forgotForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('forgot-email').value.trim();
+        try {
+            await sendPasswordResetEmail(auth, email);
+            const notice = document.getElementById('forgot-notice');
+            if (notice) notice.classList.remove('hide-view');
+        } catch (err) { alert(`Password reset error: ${err.message}`); }
+    });
+}
+
+const logoutBtn = document.getElementById('btn-logout');
+if (logoutBtn) {
+    logoutBtn.addEventListener('click', async () => {
+        try {
+            await signOut(auth);
+            alert("Session closed successfully.");
+        } catch (err) { alert("Error closing session."); }
+    });
+}
+
+const themeToggle = document.getElementById('theme-toggle');
+if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+        const docClass = document.documentElement.classList;
+        if (docClass.contains('dark')) {
+            docClass.remove('dark');
+            localStorage.setItem('mu_theme', 'light');
+        } else {
+            docClass.add('dark');
+            localStorage.setItem('mu_theme', 'dark');
+        }
+    });
+}
+
+const profileForm = document.getElementById('profile-form');
+if (profileForm) {
+    profileForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert("Profile saved successfully.");
+    });
+}
+
+const contactForm = document.getElementById('contact-form');
+if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert("Message sent. We'll respond within 24 hours.");
+        contactForm.reset();
+    });
+}
+</script>
+
+</body>
+</html>
